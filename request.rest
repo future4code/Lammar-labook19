@@ -1,4 +1,5 @@
-POST http://localhost:3003/user/create
+# Register Users:
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -8,7 +9,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/user/create
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -18,7 +19,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/user/create
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -28,7 +29,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/user/create
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -38,7 +39,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/user/create
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -48,6 +49,37 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Obito Uchiha",
+    "email": "obito@email.com",
+    "password": "obito12345"
+}
+
+###
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Shikamaru Nara",
+    "email": "shikamaru@email.com",
+    "password": "shikamaru12345"
+}
+
+###
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Mike Ehrmantraut",
+    "email": "mikeu@email.com",
+    "password": "mike12345"
+}
+
+# Register Posts:
+###
 POST http://localhost:3003/post/create
 Content-Type: application/json
 
@@ -55,7 +87,7 @@ Content-Type: application/json
     "photo": "https://i.pinimg.com/originals/c6/6a/43/c66a436cf9a9d8fb903b9d71bc4112fe.jpg",
     "description": "Vamos jogar boliche?",
     "type": "event",
-    "authorId": "2ed05ee2-3f20-499e-b6dc-19291def8beb"
+    "authorId": "c8a32547-6d51-4cd7-b5b5-d92722b5d21d"
 }
 
 ###
@@ -66,9 +98,10 @@ Content-Type: application/json
     "photo": "https://canalcienciascriminais.com.br/wp-content/uploads/2017/03/Scarface.jpg",
     "description": "say hello to my little friend",
     "type": "normal",
-    "authorId": "e4b721e4-a7ca-4232-8764-afcfed06b18f"
+    "authorId": "fe4cb2a3-d537-4a94-9fba-93a1f3e10f8b"
 }
 
+# Get Posts by id:
 ###
 GET http://localhost:3003/post/89412971-4b94-46bd-84a9-35b2b882bbd9
 Content-Type: application/json

@@ -1,4 +1,4 @@
-import { app } from "./app"
+import { app } from "./app";
 import { userRouter } from './routes/UserRouter';
 import { postRouter } from './routes/PostRouter';
 

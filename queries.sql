@@ -1,4 +1,3 @@
--- Active: 1674133550858@@35.226.146.116@3306@jbl-4416837-henrique-borges
 CREATE TABLE IF NOT EXISTS labook_users(
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

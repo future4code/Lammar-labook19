@@ -3,9 +3,11 @@ import { UserBusiness } from "../business/UserBusiness";
 import { UserInputDTO } from "../model/User";
 
 export class UserController {
-    registerUser = async ( req: Request, res: Response ) => {
+
+    public signup = async ( req: Request, res: Response ): Promise<void> => {
         try {
-            const { name, email, password } = req.body;
+
+            const { name, email, password } = req.body
 
             const input: UserInputDTO = {
                 name,
@@ -14,9 +16,9 @@ export class UserController {
             }
 
             const userBusiness = new UserBusiness()
-            await userBusiness.registerUser(input)
+            const token = await userBusiness.signup(input)
 
-            res.status(201).send("Novo usuário cadastrado com sucesso!")
+            res.status(201).send({message: "Novo usuário cadastrado com sucesso!", token})
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
