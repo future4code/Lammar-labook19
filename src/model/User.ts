@@ -11,6 +11,11 @@ export interface UserInputDTO {
     password: string
 }
 
+export interface UserLoginInputDTO {
+    email: string,
+    password: string
+}
+
 export interface AuthenticationData {
     id: string
 }

@@ -78,6 +78,26 @@ Content-Type: application/json
     "password": "mike12345"
 }
 
+#  Logins:
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "mikeu@email.com",
+    "password": "mike12345"
+}
+
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "tony@email.com",
+    "password": "tony010101"
+}
+
+
 # Register Posts:
 ###
 POST http://localhost:3003/post/create
@@ -98,6 +118,17 @@ Content-Type: application/json
     "photo": "https://canalcienciascriminais.com.br/wp-content/uploads/2017/03/Scarface.jpg",
     "description": "say hello to my little friend",
     "type": "normal",
+    "authorId": "fe4cb2a3-d537-4a94-9fba-93a1f3e10f8b"
+}
+
+###
+POST http://localhost:3003/post/create
+Content-Type: application/json
+
+{
+    "photo": "http://s2.glbimg.com/uIyVLZbkSA5zkwkq4OI4NBbH-UQ=/smart/e.glbimg.com/og/ed/f/original/2015/03/22/imagem34160_1.jpg",
+    "description": "I always tell the truth, even when I lie.",
+    "type": "Normal",
     "authorId": "fe4cb2a3-d537-4a94-9fba-93a1f3e10f8b"
 }
 
