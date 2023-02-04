@@ -2,6 +2,8 @@ import { UserDatabase } from "../data/UserDatabase";
 import { CustomError } from "../error/CustomError";
 import { User, UserInputDTO } from "../model/User";
 import { generateId } from "../services/idGenerator";
+import { Authenticator } from "../services/Authenticator";
+import { HashManager } from "../services/HashManager";
 import { 
     NotBody, 
     NotName, 
@@ -12,12 +14,15 @@ import {
     PasswordIsNotString,
     InvalidEmail, 
     InvalidPassword, 
-    PasswordNoSpaces
+    PasswordNoSpaces,
+    RegisteredUser
 } from "../error/UserErrors";
 
 export class UserBusiness {
-    registerUser = async ( input: UserInputDTO ) => {
+    
+    public signup = async ( input: UserInputDTO ): Promise<string> => {
         try {
+
             const id: string = generateId()
             const { name, email, password } = input
             
@@ -60,16 +65,31 @@ export class UserBusiness {
             if (password.includes(" ") === true) {
                 throw new PasswordNoSpaces()
             }
-    
+
+            const userDatabase = new UserDatabase()
+            
+            const registeredEmail = await userDatabase.getUserByEmail(email)
+        
+            if (registeredEmail) {
+                throw new RegisteredUser()
+            }
+
+            const hashManager = new HashManager()
+            const hashPassword: string = await hashManager.generateHash(password)
+            
             const user: User = {
                 id,
                 name,
                 email,
-                password
+                password: hashPassword
             }
 
-            const userDatabase = new UserDatabase()
-            await userDatabase.registerUser(user)
+            await userDatabase.insertUser(user)
+
+            const authenticator = new Authenticator()
+            const token =  authenticator.generateToken({id})
+            
+            return token
   
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)

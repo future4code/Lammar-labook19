@@ -1,21 +1,11 @@
 import { BaseDatabase } from "./BaseDatabase";
 import { CustomError } from "../error/CustomError";
-import { registeredUser } from "../error/UserErrors";
 import { User } from "../model/User";
 
 export class UserDatabase extends BaseDatabase {
-    registerUser = async ( user: User ): Promise<void> => {
-        try {
-            const result = await UserDatabase.connection.raw(`
-                SELECT email FROM labook_users
-                WHERE email LIKE "%${user.email.trim()}"
-            `)
 
-            const registeredEmail = result[0]
-        
-            if (registeredEmail.length > 0) {
-                throw new registeredUser()
-            }
+    public insertUser = async ( user: User ): Promise<void> => {
+        try {
 
             await UserDatabase.connection.raw(`
                 INSERT INTO labook_users (id, name, email, password)
@@ -26,6 +16,21 @@ export class UserDatabase extends BaseDatabase {
                     "${user.password}" 
                 );
             `)
+            
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+    public getUserByEmail = async ( email: string ): Promise<User> => {
+        try {
+
+            const result = await UserDatabase.connection.raw(`
+                SELECT * FROM labook_users
+                WHERE email LIKE "%${email.trim()}"
+            `)
+
+            return result[0][0]
             
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)

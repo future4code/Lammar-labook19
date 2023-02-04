@@ -3,9 +3,9 @@ import { PostBusiness } from "../business/PostBusiness";
 import { PostInputDTO } from "../model/Post";
 
 export class PostController {
-    registerPost = async ( req: Request, res: Response ) => {
+    public createPost = async ( req: Request, res: Response ): Promise<void> => {
         try {
-            const { photo, description, type, authorId } = req.body;
+            const { photo, description, type, authorId } = req.body
 
             const input: PostInputDTO = {
                 photo, 
@@ -15,16 +15,16 @@ export class PostController {
             }
 
             const postBusiness = new PostBusiness()
-            await postBusiness.registerPost(input)
+            await postBusiness.createPost(input)
 
-            res.status(201).send("Novo post cadastrado com sucesso!")
+            res.status(201).send("Novo post criado com sucesso!")
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
         }
     }
 
-    getPostById = async (req:Request, res:Response): Promise<void> => {
+    public getPostById = async (req:Request, res:Response): Promise<void> => {
         try {
             const id: string = req.params.id
 

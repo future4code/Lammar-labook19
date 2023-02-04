@@ -12,11 +12,13 @@ import {
     DescriptionIsNotString,
     AuthorIdIsNotString,
     InvalidType,
-    NotId
+    NotId,
+    PostNotFound
 } from "../error/PostErrors";
 
 export class PostBusiness {
-    registerPost = async ( input: PostInputDTO ) => {
+    
+    public createPost = async ( input: PostInputDTO ): Promise<void> => {
         try {
             const id: string = generateId()
             const { photo, description, type, authorId } = input
@@ -66,21 +68,28 @@ export class PostBusiness {
             }
 
             const postDatabase = new PostDatabase()
-            await postDatabase.registerPost(post)
+            await postDatabase.insertPost(post)
   
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }
     }
 
-    getPostById = async ( id:string ): Promise<Post> => {
+    public getPostById = async ( id:string ): Promise<Post> => {
+
         try {
             if (!id) {
                 throw new NotId()
             }
 
             const postDatabase = new PostDatabase()
-            return await postDatabase.getPostById(id)
+            const post = await postDatabase.getPostById(id)
+
+            if (!post) {
+                throw new PostNotFound()
+            }
+
+            return post
 
         } catch (err:any) {
             throw new Error(err.message)

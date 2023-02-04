@@ -76,8 +76,14 @@ export class PasswordNoSpaces extends CustomError {
     }
 }
 
-export class registeredUser extends CustomError {
+export class RegisteredUser extends CustomError {
     constructor(){
         super(409, "Já existe um usuário cadastrado com o email informado!")
+    }
+}
+
+export class UserUnauthorized extends CustomError{ 
+    constructor(){
+        super(401, "Usuário não autorizado!")
     }
 }
