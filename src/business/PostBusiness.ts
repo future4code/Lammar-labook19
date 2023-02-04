@@ -55,7 +55,7 @@ export class PostBusiness {
                 throw new AuthorIdIsNotString()
             }
 
-            if (type != "normal" && type != "event" ) {
+            if (type.toLocaleLowerCase() != "normal" && type.toLocaleLowerCase() != "event" ) {
                 throw new InvalidType()
             }
     

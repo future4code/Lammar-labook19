@@ -87,3 +87,25 @@ export class UserUnauthorized extends CustomError{
         super(401, "Usuário não autorizado!")
     }
 }
+
+export class UserNotFound extends CustomError{ 
+    constructor(){
+        super(404, "Usuário não encontrado, por favor verifique o email informado e tente novamente!")
+    }
+}
+
+export class NotBodyLogin extends CustomError {
+    constructor(){
+        super(
+            422, 
+            `Por favor, insira todos os parâmetros corretamente. 
+            Parâmetros 'email' e 'password' não foram informados ou estão incorretos!`
+        )
+    }
+}
+
+export class InvalidPasswordLogin extends CustomError {
+    constructor(){
+        super(422, "Senha incorreta!")
+    }
+}
