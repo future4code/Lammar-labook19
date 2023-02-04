@@ -15,6 +15,16 @@ CREATE TABLE IF NOT EXISTS labook_posts(
     FOREIGN KEY (author_id) REFERENCES labook_users (id)
 );
 
+CREATE TABLE IF NOT EXISTS labook_friendship(
+    id VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255),
+    user_friend_id VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES labook_users (id),
+    FOREIGN KEY (user_friend_id) REFERENCES labook_users (id)
+);
+
 SELECT * FROM labook_users;
 
 SELECT * FROM labook_posts;
+
+SELECT * FROM labook_friendship;
