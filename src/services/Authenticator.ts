@@ -1,6 +1,6 @@
 import * as jwt from "jsonwebtoken";
 import { UserUnauthorized } from "../error/UserErrors";
-import { AuthenticationData } from "../model/User";
+import { AuthenticationData } from "../model/AuthenticationData";
 
 export class Authenticator {
 
