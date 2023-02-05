@@ -18,7 +18,7 @@ import {
 
 export class PostBusiness {
     
-    public createPost = async ( input: PostInputDTO ): Promise<void> => {
+    public createPost = async ( input: PostInputDTO ): Promise<Post> => {
         try {
             const id: string = generateId()
             const { photo, description, type, authorId } = input
@@ -69,6 +69,8 @@ export class PostBusiness {
 
             const postDatabase = new PostDatabase()
             await postDatabase.insertPost(post)
+
+            return post
   
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)

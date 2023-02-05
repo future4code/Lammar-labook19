@@ -15,9 +15,9 @@ export class PostController {
             }
 
             const postBusiness = new PostBusiness()
-            await postBusiness.createPost(input)
+            const post = await postBusiness.createPost(input)
 
-            res.status(201).send("Novo post criado com sucesso!")
+            res.status(201).send({message: "Novo post criado com sucesso!", post})
             
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

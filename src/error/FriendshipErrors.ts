@@ -56,6 +56,6 @@ export class FriendshipNotFound extends CustomError{
 
 export class IdenticalUser extends CustomError{ 
     constructor(){
-        super(404, "Um usuário não pode fazer amizade com se mesmo!")
+        super(400, "Um usuário não pode fazer amizade com se mesmo!")
     }
 }

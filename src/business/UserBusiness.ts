@@ -1,6 +1,6 @@
 import { UserDatabase } from "../data/UserDatabase";
 import { CustomError } from "../error/CustomError";
-import { User, UserInputDTO, UserLoginInputDTO } from "../model/User";
+import { User, UserInputDTO, UserLoginInputDTO, UserOutput } from "../model/User";
 import { generateId } from "../services/idGenerator";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
@@ -70,7 +70,6 @@ export class UserBusiness {
             }
 
             const userDatabase = new UserDatabase()
-            
             const registeredEmail = await userDatabase.getUserByEmail(email)
         
             if (registeredEmail) {
@@ -116,23 +115,29 @@ export class UserBusiness {
             }
 
             const userDatabase = new UserDatabase()
-            const user = await userDatabase.getUserByEmail(email)
+            const userOutput = await userDatabase.getUserByEmail(email)
 
-            if(!user) {
+            if(!userOutput) {
               throw new UserNotFound()
             }
 
             const hashManager = new HashManager()
-            const compareResult: boolean = await hashManager.compareHash(password, user.password);
+            const compareResult: boolean = await hashManager.compareHash(password, userOutput.password);
 
             if(!compareResult) {
               throw new InvalidPasswordLogin()
             }
 
             const authenticator = new Authenticator()
-            const token =  authenticator.generateToken({id: user.id})
+            const token =  authenticator.generateToken({id: userOutput.id})
 
-            return token
+            const user: UserOutput = {
+                id: userOutput.id, 
+                name: userOutput.name, 
+                email: userOutput.email
+            }
+
+            return {token, user}
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
