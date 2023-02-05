@@ -35,9 +35,9 @@ export class UserController {
             }
 
             const userBusiness = new UserBusiness()
-            const token = await userBusiness.login(input)
+            const {token, user} = await userBusiness.login(input)
 
-            res.status(200).send({ message: "Login feito com sucesso!", token })
+            res.status(200).send({ message: "Login feito com sucesso!", user, token })
 
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)

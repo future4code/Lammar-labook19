@@ -136,11 +136,11 @@ Content-Type: application/json
 
 # ............................................... Get Posts by id .............................................. #
 ###
-GET http://localhost:3003/post/89412971-4b94-46bd-84a9-35b2b882bbd9
+GET http://localhost:3003/post/02a520e6-0ed1-4493-8308-eb9d2a979b4b
 Content-Type: application/json
 
 ###
-GET http://localhost:3003/post/4e1528d7-0021-42ff-bc4c-506a9a9cb3a5
+GET http://localhost:3003/post/f2868401-37f8-46e5-8f09-744e505c821c
 Content-Type: application/json
 
 
