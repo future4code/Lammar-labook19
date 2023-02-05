@@ -1,4 +1,4 @@
-# Register Users:
+# ................................................ Register Users .............................................. #
 POST http://localhost:3003/user/signup
 Content-Type: application/json
 
@@ -78,7 +78,8 @@ Content-Type: application/json
     "password": "mike12345"
 }
 
-# Logins:
+
+# ................................................... Logins ................................................. #
 ###
 POST http://localhost:3003/user/login
 Content-Type: application/json
@@ -98,7 +99,7 @@ Content-Type: application/json
 }
 
 
-# Create Posts:
+# ................................................ Create Posts .............................................. #
 ###
 POST http://localhost:3003/post/create
 Content-Type: application/json
@@ -132,7 +133,8 @@ Content-Type: application/json
     "authorId": "fe4cb2a3-d537-4a94-9fba-93a1f3e10f8b"
 }
 
-# Get Posts by token:
+
+# ............................................... Get Posts by id .............................................. #
 ###
 GET http://localhost:3003/post/89412971-4b94-46bd-84a9-35b2b882bbd9
 Content-Type: application/json
@@ -141,9 +143,21 @@ Content-Type: application/json
 GET http://localhost:3003/post/4e1528d7-0021-42ff-bc4c-506a9a9cb3a5
 Content-Type: application/json
 
-# Create Friendships:
+
+# ............................................. Create Friendships ............................................ #
 ###
 POST http://localhost:3003/friendship/create
+Content-Type: application/json
+
+{
+    "userId": "38448678-d56e-4c50-8602-1a0ba6918f20",
+    "userFriendId": "eb2ae5b8-37de-4a82-9ff8-24fb067aab7e"
+}
+
+
+# ............................................. Delete Friendship ............................................ #
+###
+DELETE http://localhost:3003/friendship/delete
 Content-Type: application/json
 
 {

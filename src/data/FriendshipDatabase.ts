@@ -34,4 +34,17 @@ export class FriendshipDatabase extends BaseDatabase {
             throw new CustomError(err.statusCode, err.message)
         }
     }
+
+    public deleteFriendship = async ( friendship: FriendshipInputDTO ): Promise<void> => {
+        try {
+            await FriendshipDatabase.connection.raw(`
+                DELETE FROM labook_friendship
+                WHERE user_id LIKE "%${friendship.userId}" 
+                AND user_friend_id LIKE "%${friendship.userFriendId}";
+            `)
+            
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
 }
